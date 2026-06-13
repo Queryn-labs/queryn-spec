@@ -1,0 +1,13 @@
+{
+  "formatVersion": "0.1",
+  "id": "history-subject",
+  "name": "История",
+  "kind": "subject",
+  "createdAt": "2026-06-13T00:00:00.000Z",
+  "locale": "ru",
+  "tags": ["history"],
+  "subject": {
+    "name": "История",
+    "grade": "10"
+  }
+}

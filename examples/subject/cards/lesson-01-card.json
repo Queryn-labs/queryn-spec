@@ -1,0 +1,8 @@
+{
+  "id": "lesson-01-card",
+  "type": "flashcard",
+  "front": "What is the source of truth for an Osnova project?",
+  "back": "The project folder.",
+  "sourceNote": "lesson-01",
+  "tags": ["history"]
+}

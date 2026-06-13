@@ -1,0 +1,13 @@
+{
+  "formatVersion": "0.1",
+  "id": "exam-prep",
+  "name": "Подготовка к экзамену",
+  "kind": "exam",
+  "createdAt": "2026-06-13T00:00:00.000Z",
+  "locale": "ru",
+  "exam": {
+    "name": "Итоговый экзамен",
+    "date": "2026-12-20",
+    "targetScore": 90
+  }
+}

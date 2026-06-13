@@ -1,0 +1,13 @@
+{
+  "id": "relation-01",
+  "from": {
+    "kind": "note",
+    "id": "checklist"
+  },
+  "to": {
+    "kind": "card",
+    "id": "exam-card-01"
+  },
+  "type": "related",
+  "createdAt": "2026-06-13T00:00:00.000Z"
+}
