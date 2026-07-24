@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.osnova.local/schemas/session-event.schema.json",
+  "title": "Osnova Session Event",
+  "type": "object",
+  "required": ["schemaVersion", "id", "sessionId", "sequence", "timestamp", "type", "data"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1" },
+    "id": { "type": "string", "minLength": 1 },
+    "sessionId": { "type": "string", "minLength": 1 },
+    "sequence": { "type": "integer", "minimum": 0 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "type": {
+      "type": "string",
+      "enum": [
+        "user-message",
+        "assistant-message",
+        "plan",
+        "operation-call",
+        "operation-result",
+        "approval",
+        "artifact-linked",
+        "status"
+      ]
+    },
+    "data": { "type": "object" }
+  }
+}

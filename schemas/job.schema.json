@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.osnova.local/schemas/job.schema.json",
+  "title": "Osnova Job Descriptor",
+  "type": "object",
+  "required": ["id", "projectPath", "operationId", "status", "createdAt", "updatedAt", "input"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "projectPath": { "type": "string", "minLength": 1 },
+    "sessionId": { "type": "string" },
+    "operationId": { "type": "string", "minLength": 3 },
+    "status": { "enum": ["queued", "waiting-approval", "running", "succeeded", "failed", "cancelled", "interrupted"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "input": { "type": "object" },
+    "result": { "type": "object" },
+    "artifactIds": { "type": "array", "items": { "type": "string" } },
+    "error": { "type": "string" },
+    "progress": { "type": "number", "minimum": 0, "maximum": 1 },
+    "statusMessage": { "type": "string" }
+  }
+}

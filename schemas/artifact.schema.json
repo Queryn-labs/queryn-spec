@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.osnova.local/schemas/artifact.schema.json",
+  "title": "Osnova Artifact Descriptor",
+  "type": "object",
+  "required": ["schemaVersion", "id", "type", "createdAt", "payloads", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1" },
+    "id": { "$ref": "#/$defs/id" },
+    "type": { "$ref": "#/$defs/namespacedId" },
+    "title": { "type": "string", "minLength": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "payloads": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/payload" },
+      "minItems": 1
+    },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "context": { "$ref": "#/$defs/context" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "metadata": { "type": "object" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+    },
+    "namespacedId": {
+      "type": "string",
+      "minLength": 3,
+      "pattern": "^[a-z0-9][a-z0-9._-]+$"
+    },
+    "payload": {
+      "type": "object",
+      "required": ["path", "mediaType", "size", "sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "mediaType": { "type": "string", "minLength": 3 },
+        "role": { "type": "string", "minLength": 1 },
+        "size": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "artifactRef": {
+      "type": "object",
+      "required": ["artifactId"],
+      "additionalProperties": false,
+      "properties": {
+        "artifactId": { "$ref": "#/$defs/id" },
+        "payloads": { "type": "array", "items": { "type": "object", "required": ["path", "sha256"], "additionalProperties": false, "properties": { "path": { "type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$" }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" } } } }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source"],
+      "additionalProperties": false,
+      "properties": {
+        "source": { "type": "string", "enum": ["manual", "import", "operation"] },
+        "toolId": { "$ref": "#/$defs/namespacedId" },
+        "operationId": { "$ref": "#/$defs/namespacedId" },
+        "runId": { "$ref": "#/$defs/id" },
+        "model": { "type": "string", "minLength": 1 },
+        "inputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/artifactRef" }
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "required": ["mode"],
+      "additionalProperties": false,
+      "properties": {
+        "mode": { "type": "string", "enum": ["none", "automatic", "declarative", "custom"] },
+        "providerId": { "$ref": "#/$defs/namespacedId" },
+        "fields": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "template": { "type": "string" }
+      }
+    }
+  }
+}

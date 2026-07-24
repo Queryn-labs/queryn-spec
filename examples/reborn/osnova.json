@@ -1,0 +1,14 @@
+{
+  "formatVersion": "0.2",
+  "id": "reborn-example",
+  "name": "Reborn Example",
+  "kind": "subject",
+  "createdAt": "2026-07-22T00:00:00.000Z",
+  "extensions": [
+    {
+      "id": "osnova.example.note-linter",
+      "version": "^1.0.0",
+      "enabled": true
+    }
+  ]
+}

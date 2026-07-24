@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.osnova.local/schemas/agent-plan.schema.json",
+  "title": "Osnova Agent Plan",
+  "type": "object",
+  "required": ["schemaVersion", "id", "goal", "steps", "createdAt", "maxSteps"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1" },
+    "id": { "type": "string", "minLength": 1 },
+    "goal": { "type": "string", "minLength": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "maxSteps": { "type": "integer", "minimum": 1, "maximum": 50 },
+    "maxDurationSeconds": { "type": "integer", "minimum": 1, "maximum": 86400 },
+    "steps": { "type": "array", "maxItems": 50, "items": { "$ref": "#/$defs/step" } }
+  },
+  "$defs": {
+    "step": {
+      "type": "object",
+      "required": ["id", "operationId", "title", "arguments", "approvalRequired"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "operationId": { "type": "string", "minLength": 3 },
+        "title": { "type": "string", "minLength": 1 },
+        "arguments": { "type": "object" },
+        "inputArtifacts": { "type": "array", "items": { "type": "object", "required": ["artifactId"], "additionalProperties": false, "properties": { "artifactId": { "type": "string" } } } },
+        "inputFromSteps": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "dependsOn": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "approvalRequired": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.osnova.local/schemas/session.schema.json",
+  "title": "Osnova Session",
+  "type": "object",
+  "required": ["schemaVersion", "id", "title", "status", "createdAt"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1" },
+    "id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "goal": { "type": "string" },
+    "status": { "type": "string", "enum": ["active", "completed", "archived"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "context": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifactId"],
+        "additionalProperties": false,
+        "properties": { "artifactId": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}

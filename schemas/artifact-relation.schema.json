@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.osnova.local/schemas/artifact-relation.schema.json",
+  "title": "Osnova Artifact Relation",
+  "type": "object",
+  "required": ["schemaVersion", "id", "from", "to", "type"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1" },
+    "id": { "type": "string", "minLength": 1 },
+    "from": { "$ref": "#/$defs/ref" },
+    "to": { "$ref": "#/$defs/ref" },
+    "type": {
+      "type": "string",
+      "minLength": 3,
+      "pattern": "^[a-z0-9][a-z0-9._-]+$"
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "metadata": { "type": "object" }
+  },
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "required": ["artifactId"],
+      "additionalProperties": false,
+      "properties": {
+        "artifactId": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
