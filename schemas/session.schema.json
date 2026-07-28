@@ -7,7 +7,11 @@
   "additionalProperties": false,
   "properties": {
     "schemaVersion": { "type": "string", "const": "1" },
-    "id": { "type": "string", "minLength": 1 },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+    },
     "title": { "type": "string", "minLength": 1 },
     "goal": { "type": "string" },
     "status": { "type": "string", "enum": ["active", "completed", "archived"] },

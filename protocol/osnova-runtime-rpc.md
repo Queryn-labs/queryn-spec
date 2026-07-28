@@ -13,7 +13,7 @@ Method groups:
 - `agent.plan|get|execute|approve|cancel`;
 - `job.get|list|cancel|subscribe`;
 - `runtime.status|start|stop`;
-- `model.install|list|remove`, `model.provider.configure|list`;
+- `model.install|list|remove`, `model.provider.configure|config-list|list`;
 - `diagnostics.doctor|export`.
 
 Server notifications preserve the JSON-RPC notification shape and are delivered
