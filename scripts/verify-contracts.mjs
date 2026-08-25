@@ -1,34 +1,16 @@
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
-import process from "node:process";
 
 const root = path.resolve(import.meta.dirname, "..");
-const coreRoot = path.resolve(option("--core") ?? path.join(root, "..", "osnova-core"));
-const sdkRoot = path.resolve(option("--sdk") ?? path.join(root, "..", "osnova-plugin-sdk"));
-const coreTypes = await readFile(path.join(coreRoot, "packages", "types", "src", "index.ts"), "utf8");
-const sdkTypes = await readFile(path.join(sdkRoot, "src", "index.ts"), "utf8");
 
-const mappings = [
-  ["artifact.schema.json", coreTypes, "ArtifactDescriptor"],
-  ["artifact-relation.schema.json", coreTypes, "ArtifactRelation"],
-  ["session.schema.json", coreTypes, "SessionDescriptor"],
-  ["session-event.schema.json", coreTypes, "SessionEvent"],
-  ["context-envelope.schema.json", coreTypes, "ContextEnvelope"],
-  ["agent-plan.schema.json", coreTypes, "AgentPlan"],
-  ["job.schema.json", coreTypes, "JobDescriptor"],
-  ["osnova.schema.json", coreTypes, "OsnovaManifest"],
-  ["extension-manifest.schema.json", sdkTypes, "ExtensionManifest"]
-];
+// Контрактные типы генерируются из схем (scripts/generate-contracts.mjs),
+// поэтому сверка schema <-> interface здесь больше не нужна.
+// Остаются две проверки: локальность $ref и валидность golden-примеров.
 
-for (const [fileName, source, interfaceName] of mappings) {
+const schemaFiles = (await readdir(path.join(root, "schemas"))).filter((fileName) => fileName.endsWith(".schema.json"));
+for (const fileName of schemaFiles) {
   const schema = JSON.parse(await readFile(path.join(root, "schemas", fileName), "utf8"));
   verifyLocalRefs(schema, schema, fileName);
-  const body = interfaceBody(source, interfaceName);
-  for (const field of schema.required ?? []) {
-    const match = new RegExp(`(?:^|\\n)\\s*${escapeRegex(field)}(\\?)?\\s*:`).exec(body);
-    if (!match) throw new Error(`${fileName}: required field ${field} is absent from ${interfaceName}.`);
-    if (match[1]) throw new Error(`${fileName}: ${field} is required by schema but optional in ${interfaceName}.`);
-  }
 }
 
 await validateExample("examples/reborn/osnova.json", "schemas/osnova.schema.json");
@@ -37,7 +19,7 @@ const eventSchema = JSON.parse(await readFile(path.join(root, "schemas", "sessio
 const eventLines = (await readFile(path.join(root, "examples", "reborn", "sessions", "first-session", "events.jsonl"), "utf8")).split(/\r?\n/).filter(Boolean);
 for (const [index, line] of eventLines.entries()) validate(eventSchema, JSON.parse(line), eventSchema, `events.jsonl:${index + 1}`);
 
-process.stdout.write(`Verified ${mappings.length} schema/type contracts and Reborn golden project.\n`);
+process.stdout.write(`Verified ${schemaFiles.length} contract schemas and the Reborn golden project.\n`);
 
 async function validateExample(examplePath, schemaPath) {
   const [value, schema] = await Promise.all([
@@ -87,22 +69,3 @@ function resolveRef(schema, reference) {
   }
   return cursor;
 }
-
-function interfaceBody(source, name) {
-  const start = source.indexOf(`interface ${name}`);
-  if (start < 0) throw new Error(`Missing TypeScript interface ${name}.`);
-  const open = source.indexOf("{", start);
-  let depth = 0;
-  for (let index = open; index < source.length; index += 1) {
-    if (source[index] === "{") depth += 1;
-    else if (source[index] === "}" && --depth === 0) return source.slice(open + 1, index);
-  }
-  throw new Error(`Unclosed TypeScript interface ${name}.`);
-}
-
-function option(name) {
-  const index = process.argv.indexOf(name);
-  return index >= 0 ? process.argv[index + 1] : undefined;
-}
-
-function escapeRegex(value) { return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }

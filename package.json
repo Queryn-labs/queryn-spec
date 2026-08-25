@@ -1,0 +1,14 @@
+{
+  "name": "osnova-spec",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Спецификация формата проекта Osnova и контрактные схемы",
+  "scripts": {
+    "verify": "node scripts/verify-contracts.mjs",
+    "generate": "node scripts/generate-contracts.mjs"
+  },
+  "devDependencies": {
+    "json-schema-to-typescript": "^15.0.4"
+  }
+}

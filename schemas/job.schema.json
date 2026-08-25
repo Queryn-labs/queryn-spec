@@ -10,7 +10,7 @@
     "projectPath": { "type": "string", "minLength": 1 },
     "sessionId": { "type": "string" },
     "operationId": { "type": "string", "minLength": 3 },
-    "status": { "enum": ["queued", "waiting-approval", "running", "succeeded", "failed", "cancelled", "interrupted"] },
+    "status": { "$ref": "#/$defs/jobStatus" },
     "createdAt": { "type": "string", "format": "date-time" },
     "updatedAt": { "type": "string", "format": "date-time" },
     "input": { "type": "object" },
@@ -19,5 +19,12 @@
     "error": { "type": "string" },
     "progress": { "type": "number", "minimum": 0, "maximum": 1 },
     "statusMessage": { "type": "string" }
+  },
+  "$defs": {
+    "jobStatus": {
+      "title": "JobStatus",
+      "type": "string",
+      "enum": ["queued", "waiting-approval", "running", "succeeded", "failed", "cancelled", "interrupted"]
+    }
   }
 }

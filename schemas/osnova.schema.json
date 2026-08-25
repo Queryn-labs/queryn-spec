@@ -6,10 +6,7 @@
   "required": ["formatVersion", "id", "name", "createdAt"],
   "additionalProperties": false,
   "properties": {
-    "formatVersion": {
-      "type": "string",
-      "enum": ["0.1", "0.2"]
-    },
+    "formatVersion": { "$ref": "#/$defs/formatVersion" },
     "id": {
       "type": "string",
       "minLength": 1,
@@ -22,10 +19,7 @@
     "description": {
       "type": "string"
     },
-    "kind": {
-      "type": "string",
-      "enum": ["general", "subject", "exam"]
-    },
+    "kind": { "$ref": "#/$defs/projectKind" },
     "createdAt": {
       "type": "string",
       "format": "date-time"
@@ -46,7 +40,27 @@
       },
       "uniqueItems": true
     },
-    "subject": {
+    "subject": { "$ref": "#/$defs/subjectMetadata" },
+    "exam": { "$ref": "#/$defs/examMetadata" },
+    "extensions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/extensionRequirement" },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "formatVersion": {
+      "title": "ProjectFormatVersion",
+      "type": "string",
+      "enum": ["0.1", "0.2"]
+    },
+    "projectKind": {
+      "title": "ProjectKind",
+      "type": "string",
+      "enum": ["general", "subject", "exam"]
+    },
+    "subjectMetadata": {
+      "title": "SubjectMetadata",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -55,7 +69,8 @@
         "institution": { "type": "string" }
       }
     },
-    "exam": {
+    "examMetadata": {
+      "title": "ExamMetadata",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -64,14 +79,8 @@
         "targetScore": { "type": "number", "minimum": 0 }
       }
     },
-    "extensions": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/extensionRequirement" },
-      "uniqueItems": true
-    }
-  },
-  "$defs": {
     "extensionRequirement": {
+      "title": "ExtensionRequirement",
       "type": "object",
       "required": ["id", "version"],
       "additionalProperties": false,

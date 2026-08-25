@@ -11,7 +11,12 @@
     "sessionId": { "type": "string", "minLength": 1 },
     "sequence": { "type": "integer", "minimum": 0 },
     "timestamp": { "type": "string", "format": "date-time" },
-    "type": {
+    "type": { "$ref": "#/$defs/eventType" },
+    "data": { "type": "object" }
+  },
+  "$defs": {
+    "eventType": {
+      "title": "SessionEventType",
       "type": "string",
       "enum": [
         "user-message",
@@ -21,9 +26,10 @@
         "operation-result",
         "approval",
         "artifact-linked",
-        "status"
+        "status",
+        "tool-call",
+        "observation"
       ]
-    },
-    "data": { "type": "object" }
+    }
   }
 }

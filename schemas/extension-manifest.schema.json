@@ -3,44 +3,71 @@
   "$id": "https://spec.osnova.local/schemas/extension-manifest.schema.json",
   "title": "Osnova Extension Manifest v1",
   "type": "object",
-  "required": ["manifestVersion", "id", "name", "version", "osnova", "permissions", "contributes"],
+  "required": [
+    "manifestVersion",
+    "id",
+    "name",
+    "version",
+    "osnova",
+    "permissions",
+    "contributes"
+  ],
   "additionalProperties": false,
   "properties": {
-    "manifestVersion": { "type": "string", "const": "1" },
-    "id": { "$ref": "#/$defs/namespacedId" },
-    "name": { "type": "string", "minLength": 1 },
-    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+][0-9A-Za-z.-]+)?$" },
-    "description": { "type": "string" },
-    "publisher": { "type": "string", "minLength": 1 },
-    "license": { "type": "string", "minLength": 1 },
+    "manifestVersion": {
+      "type": "string",
+      "const": "1"
+    },
+    "id": {
+      "$ref": "#/$defs/namespacedId"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+][0-9A-Za-z.-]+)?$"
+    },
+    "description": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string",
+      "minLength": 1
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
     "osnova": {
       "type": "object",
-      "required": ["minVersion"],
+      "required": [
+        "minVersion"
+      ],
       "additionalProperties": false,
-      "properties": { "minVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+][0-9A-Za-z.-]+)?$" } }
+      "properties": {
+        "minVersion": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+][0-9A-Za-z.-]+)?$"
+        }
+      }
     },
     "permissions": {
       "type": "array",
-      "items": { "$ref": "#/$defs/permission" },
+      "items": {
+        "$ref": "#/$defs/permission"
+      },
       "uniqueItems": true
     },
     "runtimes": {
       "type": "array",
-      "items": { "$ref": "#/$defs/runtime" }
+      "items": {
+        "$ref": "#/$defs/runtime"
+      }
     },
     "contributes": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "themes": { "type": "array", "items": { "$ref": "#/$defs/theme" } },
-        "tools": { "type": "array", "items": { "$ref": "#/$defs/tool" } },
-        "operations": { "type": "array", "items": { "$ref": "#/$defs/operation" } },
-        "artifactTypes": { "type": "array", "items": { "$ref": "#/$defs/artifactType" } },
-        "contextProviders": { "type": "array", "items": { "$ref": "#/$defs/contextProvider" } },
-        "connectors": { "type": "array", "items": { "$ref": "#/$defs/connector" } },
-        "modelProviders": { "type": "array", "items": { "$ref": "#/$defs/modelProvider" } },
-        "views": { "type": "array", "items": { "$ref": "#/$defs/view" } }
-      }
+      "$ref": "#/$defs/contributions"
     }
   },
   "$defs": {
@@ -67,79 +94,266 @@
     },
     "runtime": {
       "type": "object",
-      "required": ["id", "kind", "lifecycle"],
+      "required": [
+        "id",
+        "kind",
+        "lifecycle"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/namespacedId" },
-        "kind": { "type": "string", "enum": ["builtin", "node-process", "native-process", "oci", "remote"] },
-        "lifecycle": { "type": "string", "enum": ["job", "project", "shared"] },
-        "entry": { "type": "string" },
-        "image": { "type": "string", "pattern": "@sha256:[a-f0-9]{64}$" },
-        "endpoint": { "type": "string" },
-        "protocol": { "type": "string", "enum": ["osnova-tool-v1", "mcp"] },
-        "idleTimeoutSeconds": { "type": "integer", "minimum": 1 },
-        "resources": { "$ref": "#/$defs/resources" },
-        "models": { "type": "array", "items": { "$ref": "#/$defs/modelDependency" } }
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "kind": {
+          "$ref": "#/$defs/runtimeKind"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/runtimeLifecycle"
+        },
+        "entry": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string",
+          "pattern": "@sha256:[a-f0-9]{64}$"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "osnova-tool-v1",
+            "mcp"
+          ]
+        },
+        "idleTimeoutSeconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "resources": {
+          "$ref": "#/$defs/resources"
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/modelDependency"
+          }
+        }
       },
       "allOf": [
         {
-          "if": { "properties": { "kind": { "const": "oci" } }, "required": ["kind"] },
-          "then": { "properties": { "lifecycle": { "const": "job" } } }
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "oci"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "lifecycle": {
+                "const": "job"
+              }
+            }
+          }
         }
       ]
     },
     "tool": {
       "type": "object",
-      "required": ["id", "title"],
+      "required": [
+        "id",
+        "title"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/namespacedId" },
-        "title": { "type": "string", "minLength": 1 },
-        "description": { "type": "string" },
-        "runtimeId": { "$ref": "#/$defs/namespacedId" }
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "runtimeId": {
+          "$ref": "#/$defs/namespacedId"
+        }
       }
     },
     "operation": {
       "type": "object",
-      "required": ["id", "toolId", "version", "title", "inputSchema", "outputSchema", "risk", "agentVisibility", "execution", "permissions"],
+      "required": [
+        "id",
+        "toolId",
+        "version",
+        "title",
+        "inputSchema",
+        "outputSchema",
+        "risk",
+        "agentVisibility",
+        "execution",
+        "permissions"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/namespacedId" },
-        "toolId": { "$ref": "#/$defs/namespacedId" },
-        "version": { "type": "string", "minLength": 1 },
-        "title": { "type": "string", "minLength": 1 },
-        "description": { "type": "string" },
-        "inputSchema": { "type": "object" },
-        "outputSchema": { "type": "object" },
-        "accepts": { "type": "array", "items": { "$ref": "#/$defs/namespacedId" } },
-        "produces": { "type": "array", "items": { "$ref": "#/$defs/namespacedId" } },
-        "risk": { "type": "string", "enum": ["safe-read", "project-write", "network-egress", "external-side-effect", "privileged"] },
-        "agentVisibility": { "type": "string", "enum": ["hidden", "explicit", "automatic"] },
-        "execution": { "type": "string", "enum": ["immediate", "job"] },
-        "timeoutSeconds": { "type": "integer", "minimum": 1 },
-        "cancellable": { "type": "boolean" },
-        "idempotent": { "type": "boolean" },
-        "permissions": { "type": "array", "items": { "$ref": "#/$defs/permission" }, "uniqueItems": true },
-        "resources": { "$ref": "#/$defs/resources" }
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "toolId": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "inputSchema": {
+          "type": "object"
+        },
+        "outputSchema": {
+          "type": "object"
+        },
+        "accepts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/namespacedId"
+          }
+        },
+        "produces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/namespacedId"
+          }
+        },
+        "risk": {
+          "$ref": "#/$defs/operationRisk"
+        },
+        "agentVisibility": {
+          "type": "string",
+          "enum": [
+            "hidden",
+            "explicit",
+            "automatic"
+          ]
+        },
+        "execution": {
+          "type": "string",
+          "enum": [
+            "immediate",
+            "job"
+          ]
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cancellable": {
+          "type": "boolean"
+        },
+        "idempotent": {
+          "type": "boolean"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/permission"
+          },
+          "uniqueItems": true
+        },
+        "resources": {
+          "$ref": "#/$defs/resources"
+        }
       }
     },
     "artifactType": {
       "type": "object",
-      "required": ["id", "title", "context"],
+      "required": [
+        "id",
+        "title",
+        "context"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/namespacedId" },
-        "title": { "type": "string", "minLength": 1 },
-        "mediaTypes": { "type": "array", "items": { "type": "string" } },
-        "context": {
-          "type": "object",
-          "required": ["mode"],
-          "additionalProperties": false,
-          "properties": {
-            "mode": { "type": "string", "enum": ["none", "automatic", "declarative", "custom"] },
-            "providerId": { "$ref": "#/$defs/namespacedId" },
-            "fields": { "type": "array", "items": { "type": "string" } }
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mediaTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
+        },
+        "context": {
+          "title": "ArtifactContextBinding",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "mode"
+              ],
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "enum": [
+                    "none",
+                    "automatic"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "mode",
+                "fields"
+              ],
+              "properties": {
+                "mode": {
+                  "const": "declarative"
+                },
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "mode",
+                "providerId"
+              ],
+              "properties": {
+                "mode": {
+                  "const": "custom"
+                },
+                "providerId": {
+                  "$ref": "#/$defs/namespacedId"
+                }
+              }
+            }
+          ]
         }
       }
     },
@@ -147,47 +361,338 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "cpu": { "type": "number", "exclusiveMinimum": 0 },
-        "memoryMb": { "type": "integer", "minimum": 1 },
-        "diskMb": { "type": "integer", "minimum": 1 },
-        "gpu": { "type": "boolean" },
-        "network": { "type": "boolean" }
+        "cpu": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "memoryMb": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "diskMb": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "gpu": {
+          "type": "boolean"
+        },
+        "network": {
+          "type": "boolean"
+        }
       }
     },
     "modelDependency": {
       "type": "object",
-      "required": ["id", "version", "source", "sha256", "size", "license"],
+      "required": [
+        "id",
+        "version",
+        "source",
+        "sha256",
+        "size",
+        "license"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/namespacedId" },
-        "version": { "type": "string", "minLength": 1 },
-        "source": { "type": "string", "minLength": 1 },
-        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-        "size": { "type": "integer", "minimum": 1 },
-        "license": { "type": "string", "minLength": 1 },
-        "platforms": { "type": "array", "items": { "enum": ["win32", "darwin"] }, "uniqueItems": true },
-        "architectures": { "type": "array", "items": { "enum": ["x64", "arm64"] }, "uniqueItems": true }
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "win32",
+              "darwin"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "architectures": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "x64",
+              "arm64"
+            ]
+          },
+          "uniqueItems": true
+        }
       }
     },
     "theme": {
-      "type": "object", "required": ["id", "title", "tokens"], "additionalProperties": false,
-      "properties": { "id": { "$ref": "#/$defs/namespacedId" }, "title": { "type": "string" }, "tokens": { "type": "string" }, "icons": { "type": "string" } }
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "tokens"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "title": {
+          "type": "string"
+        },
+        "tokens": {
+          "type": "string"
+        },
+        "icons": {
+          "type": "string"
+        }
+      }
     },
     "contextProvider": {
-      "type": "object", "required": ["id", "artifactTypes", "version", "runtimeId"], "additionalProperties": false,
-      "properties": { "id": { "$ref": "#/$defs/namespacedId" }, "artifactTypes": { "type": "array", "items": { "$ref": "#/$defs/namespacedId" } }, "version": { "type": "string" }, "runtimeId": { "$ref": "#/$defs/namespacedId" }, "resourceUriTemplate": { "type": "string", "minLength": 1 } }
+      "type": "object",
+      "required": [
+        "id",
+        "artifactTypes",
+        "version",
+        "runtimeId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "artifactTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/namespacedId"
+          }
+        },
+        "version": {
+          "type": "string"
+        },
+        "runtimeId": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "resourceUriTemplate": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     },
     "connector": {
-      "type": "object", "required": ["id", "title", "runtimeId", "scope", "produces", "permissions"], "additionalProperties": false,
-      "properties": { "id": { "$ref": "#/$defs/namespacedId" }, "title": { "type": "string" }, "runtimeId": { "$ref": "#/$defs/namespacedId" }, "scope": { "enum": ["project", "external-explicit"] }, "produces": { "type": "array", "items": { "$ref": "#/$defs/namespacedId" } }, "permissions": { "type": "array", "items": { "$ref": "#/$defs/permission" }, "uniqueItems": true } }
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "runtimeId",
+        "scope",
+        "produces",
+        "permissions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "title": {
+          "type": "string"
+        },
+        "runtimeId": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "scope": {
+          "enum": [
+            "project",
+            "external-explicit"
+          ]
+        },
+        "produces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/namespacedId"
+          }
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/permission"
+          },
+          "uniqueItems": true
+        }
+      }
     },
     "modelProvider": {
-      "type": "object", "required": ["id", "title", "runtimeId", "recipient", "capabilities"], "additionalProperties": false,
-      "properties": { "id": { "$ref": "#/$defs/namespacedId" }, "title": { "type": "string" }, "runtimeId": { "$ref": "#/$defs/namespacedId" }, "recipient": { "enum": ["local", "cloud"] }, "capabilities": { "type": "array", "items": { "enum": ["chat", "vision", "embeddings", "structured-output"] }, "uniqueItems": true } }
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "runtimeId",
+        "recipient",
+        "capabilities"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "title": {
+          "type": "string"
+        },
+        "runtimeId": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "recipient": {
+          "enum": [
+            "local",
+            "cloud"
+          ]
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "chat",
+              "vision",
+              "embeddings",
+              "structured-output"
+            ]
+          },
+          "uniqueItems": true
+        }
+      }
     },
     "view": {
-      "type": "object", "required": ["id", "title", "toolId", "entry"], "additionalProperties": false,
-      "properties": { "id": { "$ref": "#/$defs/namespacedId" }, "title": { "type": "string" }, "toolId": { "$ref": "#/$defs/namespacedId" }, "entry": { "type": "string" } }
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "toolId",
+        "entry"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "title": {
+          "type": "string"
+        },
+        "toolId": {
+          "$ref": "#/$defs/namespacedId"
+        },
+        "entry": {
+          "type": "string"
+        }
+      }
+    },
+    "runtimeKind": {
+      "title": "RuntimeKind",
+      "type": "string",
+      "enum": [
+        "builtin",
+        "node-process",
+        "native-process",
+        "oci",
+        "remote"
+      ]
+    },
+    "runtimeLifecycle": {
+      "title": "RuntimeLifecycle",
+      "type": "string",
+      "enum": [
+        "job",
+        "project",
+        "shared"
+      ]
+    },
+    "operationRisk": {
+      "title": "OperationRisk",
+      "type": "string",
+      "enum": [
+        "safe-read",
+        "project-write",
+        "network-egress",
+        "external-side-effect",
+        "privileged"
+      ]
+    },
+    "contributions": {
+      "title": "ExtensionContributions",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/theme"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tool"
+          }
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/operation"
+          }
+        },
+        "artifactTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactType"
+          }
+        },
+        "contextProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/contextProvider"
+          }
+        },
+        "connectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/connector"
+          }
+        },
+        "modelProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/modelProvider"
+          }
+        },
+        "views": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        }
+      }
+    },
+    "contextMode": {
+      "title": "ContextMode",
+      "type": "string",
+      "enum": [
+        "none",
+        "automatic",
+        "declarative",
+        "custom"
+      ]
     }
   }
 }

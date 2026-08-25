@@ -3,36 +3,117 @@
   "$id": "https://spec.osnova.local/schemas/context-envelope.schema.json",
   "title": "Osnova Context Envelope",
   "type": "object",
-  "required": ["level", "sources", "sensitivity", "allowedRecipients", "tokenEstimate", "truncated", "providerVersion"],
+  "required": [
+    "level",
+    "sources",
+    "sensitivity",
+    "allowedRecipients",
+    "tokenEstimate",
+    "truncated",
+    "providerVersion"
+  ],
   "additionalProperties": false,
   "properties": {
-    "level": { "enum": ["compact", "expanded"] },
-    "text": { "type": "string" },
-    "structured": { "type": "object" },
-    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
-    "sensitivity": { "enum": ["public", "project", "sensitive"] },
-    "allowedRecipients": { "type": "array", "items": { "enum": ["local", "cloud"] }, "uniqueItems": true },
-    "tokenEstimate": { "type": "integer", "minimum": 0 },
-    "truncated": { "type": "boolean" },
-    "freshness": { "type": "string", "format": "date-time" },
-    "providerVersion": { "type": "string", "minLength": 1 }
+    "level": {
+      "$ref": "#/$defs/level"
+    },
+    "text": {
+      "type": "string"
+    },
+    "structured": {
+      "type": "object"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "project",
+        "sensitive"
+      ]
+    },
+    "allowedRecipients": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "local",
+          "cloud"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "tokenEstimate": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "freshness": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "providerVersion": {
+      "type": "string",
+      "minLength": 1
+    }
   },
   "$defs": {
     "source": {
       "type": "object",
       "additionalProperties": false,
       "anyOf": [
-        { "required": ["artifactId"] },
-        { "required": ["projectRelativePath"] }
+        {
+          "required": [
+            "artifactId"
+          ]
+        },
+        {
+          "required": [
+            "projectRelativePath"
+          ]
+        }
       ],
       "properties": {
-        "artifactId": { "type": "string", "minLength": 1 },
-        "projectRelativePath": { "type": "string", "minLength": 1 },
-        "title": { "type": "string", "minLength": 1 },
-        "kind": { "enum": ["artifact", "note", "asset"] },
-        "payloadPath": { "type": "string" },
-        "providerId": { "type": "string" }
-      }
+        "artifactId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "projectRelativePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "artifact",
+            "note",
+            "asset"
+          ]
+        },
+        "payloadPath": {
+          "type": "string"
+        },
+        "providerId": {
+          "type": "string"
+        }
+      },
+      "title": "ContextSource"
+    },
+    "level": {
+      "title": "ContextLevel",
+      "type": "string",
+      "enum": [
+        "compact",
+        "expanded"
+      ]
     }
   }
 }

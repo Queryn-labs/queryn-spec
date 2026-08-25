@@ -83,11 +83,16 @@
       "required": ["mode"],
       "additionalProperties": false,
       "properties": {
-        "mode": { "type": "string", "enum": ["none", "automatic", "declarative", "custom"] },
+        "mode": { "$ref": "#/$defs/contextMode" },
         "providerId": { "$ref": "#/$defs/namespacedId" },
         "fields": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
         "template": { "type": "string" }
       }
+    },
+    "contextMode": {
+      "title": "ArtifactContextMode",
+      "type": "string",
+      "enum": ["none", "automatic", "declarative", "custom"]
     }
   }
 }

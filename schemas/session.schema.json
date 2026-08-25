@@ -14,7 +14,7 @@
     },
     "title": { "type": "string", "minLength": 1 },
     "goal": { "type": "string" },
-    "status": { "type": "string", "enum": ["active", "completed", "archived"] },
+    "status": { "$ref": "#/$defs/sessionStatus" },
     "createdAt": { "type": "string", "format": "date-time" },
     "updatedAt": { "type": "string", "format": "date-time" },
     "context": {
@@ -25,6 +25,18 @@
         "additionalProperties": false,
         "properties": { "artifactId": { "type": "string", "minLength": 1 } }
       }
+    },
+    "memoryMode": { "$ref": "#/$defs/memoryMode" }
+  },
+  "$defs": {
+    "sessionStatus": {
+      "title": "SessionStatus",
+      "type": "string",
+      "enum": ["active", "completed", "archived"]
+    },
+    "memoryMode": {
+      "type": "string",
+      "enum": ["full", "off"]
     }
   }
 }
