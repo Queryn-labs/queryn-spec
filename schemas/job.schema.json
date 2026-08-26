@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/job.schema.json",
-  "title": "Osnova Job Descriptor",
+  "$id": "https://spec.queryn.local/schemas/job.schema.json",
+  "title": "Queryn Job Descriptor",
   "type": "object",
   "required": ["id", "projectPath", "operationId", "status", "createdAt", "updatedAt", "input"],
   "additionalProperties": false,

@@ -21,7 +21,7 @@ function fixtureConfig(name) {
   return path.join(fixtures, name);
 }
 
-test("D1 hard-fails a missing osnova-docs path from a code arrow", () => {
+test("D1 hard-fails a missing queryn-docs path from a code arrow", () => {
   const result = runScanner(["--config", fixtureConfig("doc-check.json"), "--only", "D1"]);
   assert.equal(result.status, 1, `${result.stdout}\n${result.stderr}`);
   assert.match(result.stdout, /\[D1\]/u);

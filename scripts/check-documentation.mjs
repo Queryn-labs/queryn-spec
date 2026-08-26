@@ -174,7 +174,7 @@ async function checkD1({ config, failures }) {
 }
 
 async function checkD2({ config, failures }) {
-  const docsRoot = resolveConfigPath(config, config.docsRoot ?? "../osnova-docs/docs");
+  const docsRoot = resolveConfigPath(config, config.docsRoot ?? "../queryn-docs/docs");
   if (!(await pathExists(docsRoot))) {
     addIssue(failures, "D2", docsRoot, "Documentation root does not exist.");
     return;
@@ -233,7 +233,7 @@ async function checkD2({ config, failures }) {
 }
 
 async function checkD3({ config, failures }) {
-  const schemaPath = resolveConfigPath(config, config.projectFormatSchema ?? "schemas/osnova.schema.json");
+  const schemaPath = resolveConfigPath(config, config.projectFormatSchema ?? "schemas/queryn.schema.json");
   const schema = await readJsonOrIssue(schemaPath, failures, "D3");
   if (!schema) return;
   const declaredVersions = findProjectFormatVersions(schema);
@@ -243,7 +243,7 @@ async function checkD3({ config, failures }) {
   }
   const latestVersion = maxVersion(declaredVersions);
 
-  const projectSources = config.projectFormatSources ?? ["../osnova-core/packages/project/src/migration.ts"];
+  const projectSources = config.projectFormatSources ?? ["../queryn-core/packages/project/src/migration.ts"];
   if (!Array.isArray(projectSources) || projectSources.length === 0) {
     addIssue(failures, "D3", schemaPath, "projectFormatSources must contain at least one migration source.");
     return;
@@ -261,9 +261,9 @@ async function checkD3({ config, failures }) {
     for (const version of extractVersionLiterals(sourceText)) supportedVersions.add(version);
   }
   if (supportedVersions.size === 0) {
-    addIssue(failures, "D3", schemaPath, "No project format versions were found in @osnova/project migration sources.");
+    addIssue(failures, "D3", schemaPath, "No project format versions were found in @queryn/project migration sources.");
   } else if (maxVersion([...supportedVersions]) !== latestVersion) {
-    addIssue(failures, "D3", schemaPath, `ProjectFormatVersion latest is ${latestVersion}, but @osnova/project supports ${maxVersion([...supportedVersions])}.`);
+    addIssue(failures, "D3", schemaPath, `ProjectFormatVersion latest is ${latestVersion}, but @queryn/project supports ${maxVersion([...supportedVersions])}.`);
   }
 
   const pages = config.versionSensitivePages ?? [];
@@ -303,7 +303,7 @@ async function checkD3({ config, failures }) {
 }
 
 async function checkD4({ config, failures }) {
-  const docsRoot = resolveConfigPath(config, config.docsRoot ?? "../osnova-docs/docs");
+  const docsRoot = resolveConfigPath(config, config.docsRoot ?? "../queryn-docs/docs");
   if (!(await pathExists(docsRoot))) {
     addIssue(failures, "D4", docsRoot, "Documentation root does not exist.");
     return;
@@ -319,7 +319,7 @@ async function checkD4({ config, failures }) {
       addIssue(failures, "D4", block.filePath, "Mermaid fenced block is not closed.", block.startOffset, block.sourceText);
       continue;
     }
-    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), "osnova-doc-check-"));
+    const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), "queryn-doc-check-"));
     const inputPath = path.join(temporaryDirectory, "diagram.mmd");
     const outputPath = path.join(temporaryDirectory, "diagram.svg");
     await writeFile(inputPath, `${block.body.trimEnd()}\n`, "utf8");
@@ -344,12 +344,12 @@ async function checkD4({ config, failures }) {
 
 async function checkD5({ config, failures }) {
   const readmes = config.readmes ?? [
-    "../osnova-core/README.md",
-    "../osnova-desktop/README.md",
-    "../osnova-docs/README.md",
-    "../osnova-plugin-sdk/README.md",
-    "../osnova-plugins/README.md",
-    "../osnova-runtime/README.md",
+    "../queryn-core/README.md",
+    "../queryn-desktop/README.md",
+    "../queryn-docs/README.md",
+    "../queryn-sdk/README.md",
+    "../queryn-extensions/README.md",
+    "../queryn-runtime/README.md",
     "README.md"
   ];
   const requiredSections = config.requiredReadmeSections ?? [
@@ -379,10 +379,10 @@ async function checkD5({ config, failures }) {
 }
 
 async function checkD6({ config, failures }) {
-  const buildConfig = config.docsBuild ?? { enabled: true, cwd: "../osnova-docs", command: "pnpm", args: ["build"] };
+  const buildConfig = config.docsBuild ?? { enabled: true, cwd: "../queryn-docs", command: "pnpm", args: ["build"] };
   if (buildConfig.enabled === false) return;
-  const workingDirectory = resolveConfigPath(config, buildConfig.cwd ?? "../osnova-docs");
-  const vitepressConfigPath = resolveConfigPath(config, buildConfig.config ?? "../osnova-docs/docs/.vitepress/config.ts");
+  const workingDirectory = resolveConfigPath(config, buildConfig.cwd ?? "../queryn-docs");
+  const vitepressConfigPath = resolveConfigPath(config, buildConfig.config ?? "../queryn-docs/docs/.vitepress/config.ts");
   if (await pathExists(vitepressConfigPath)) {
     const vitepressConfig = await readFile(vitepressConfigPath, "utf8");
     const ignoreDeadLinks = vitepressConfig.match(/\bignoreDeadLinks\s*:\s*([^,}\n]+)/u)?.[1]?.trim();
@@ -411,7 +411,7 @@ async function checkD6({ config, failures }) {
 
 async function checkD7({ config, warnings }) {
   const mappings = normalizeDocMap(config.docMap ?? config.documentationMap ?? {});
-  const docsRoot = resolveConfigPath(config, config.docsRoot ?? "../osnova-docs/docs");
+  const docsRoot = resolveConfigPath(config, config.docsRoot ?? "../queryn-docs/docs");
   for (const mapping of mappings) {
     const modulePath = resolveConfigPath(config, mapping.module);
     const pagePath = path.isAbsolute(mapping.page) ? mapping.page : path.join(docsRoot, mapping.page);
@@ -582,16 +582,16 @@ function extractCodeComments(filePath, sourceText) {
 
 function extractDocReferences(commentText) {
   const references = [];
-  const pattern = /\bosnova-docs\/[^\s`"'<>]+/gu;
+  const pattern = /\bqueryn-docs\/[^\s`"'<>]+/gu;
   for (const match of commentText.matchAll(pattern)) references.push({ value: match[0], offset: match.index });
   return references;
 }
 
 function normalizeDocReference(value) {
   const clean = value.replace(/[),.;:!?]+$/u, "").split(/[?#]/u, 1)[0];
-  if (!clean.startsWith("osnova-docs/") || clean.includes("\\")) return null;
+  if (!clean.startsWith("queryn-docs/") || clean.includes("\\")) return null;
   const normalized = path.posix.normalize(clean);
-  if (normalized !== clean || normalized.includes("../") || normalized === "osnova-docs") return null;
+  if (normalized !== clean || normalized.includes("../") || normalized === "queryn-docs") return null;
   return normalized;
 }
 

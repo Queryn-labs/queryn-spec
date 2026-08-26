@@ -1,4 +1,4 @@
-# Osnova Runtime RPC v1
+# Queryn Runtime RPC v1
 
 Transport is newline-delimited JSON-RPC 2.0 over a random Unix domain socket on macOS or named pipe on Windows. Each request includes `_auth` in params; the bearer token is generated per runtime instance and must remain in desktop main/headless client.
 
@@ -55,8 +55,8 @@ operations проходят обычную проверку доступност
 живут в локальном runtime state.
 
 `mcp.server.register`, `mcp.server.list` и `mcp.server.unregister` пока не входят
-в dispatch этого RPC. Они доступны через прямой API `OsnovaRuntime` и тестовые
+в dispatch этого RPC. Они доступны через прямой API `QuerynRuntime` и тестовые
 сценарии, а одноимённые desktop bridge методы не образуют рабочий публичный
 RPC-путь до добавления серверных dispatch-кейсов.
 
-RPC is a local process contract, not an extension API. Tools use Osnova Tool Protocol v1 or MCP adapter and never receive the runtime bearer token.
+RPC is a local process contract, not an extension API. Tools use Queryn Tool Protocol v1 or MCP adapter and never receive the runtime bearer token.

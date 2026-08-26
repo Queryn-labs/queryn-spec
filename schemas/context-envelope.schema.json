@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/context-envelope.schema.json",
-  "title": "Osnova Context Envelope",
+  "$id": "https://spec.queryn.local/schemas/context-envelope.schema.json",
+  "title": "Queryn Context Envelope",
   "type": "object",
   "required": [
     "level",

@@ -1,24 +1,24 @@
 {
   "pathBase": "spec",
-  "docsRoot": "../osnova-docs/docs",
-  "archiveRoots": ["../osnova-docs/docs/archive"],
+  "docsRoot": "../queryn-docs/docs",
+  "archiveRoots": ["../queryn-docs/docs/archive"],
   "commentHygieneConfig": "scripts/comment-hygiene/repos.json",
   "codeArrowRepositories": [
-    "osnova-core",
-    "osnova-plugin-sdk",
-    "osnova-runtime",
-    "osnova-desktop",
-    "osnova-plugins"
+    "queryn-core",
+    "queryn-sdk",
+    "queryn-runtime",
+    "queryn-desktop",
+    "queryn-extensions"
   ],
-  "projectFormatSchema": "schemas/osnova.schema.json",
-  "projectFormatSources": ["../osnova-core/packages/project/src/migration.ts"],
-  "hostVersionSources": ["../osnova-runtime/src/extension-manager.ts"],
+  "projectFormatSchema": "schemas/queryn.schema.json",
+  "projectFormatSources": ["../queryn-core/packages/project/src/migration.ts"],
+  "hostVersionSources": ["../queryn-runtime/src/extension-manager.ts"],
   "versionSensitivePages": [
-    { "path": "../osnova-docs/docs/architecture/versioning-and-migrations.md", "requiredVersions": ["0.1", "0.2"] },
-    { "path": "../osnova-docs/docs/product/osnova-reborn.md", "requiredVersions": ["0.1", "0.2"] },
-    { "path": "../osnova-docs/docs/product/roadmap.md", "requiredVersions": ["0.1", "0.2"] },
-    { "path": "../osnova-docs/docs/product/jobs-and-non-goals.md", "requiredVersions": ["0.2"] },
-    { "path": "../osnova-docs/docs/specification/index.md", "requiredVersions": ["0.1", "0.2"] }
+    { "path": "../queryn-docs/docs/architecture/versioning-and-migrations.md", "requiredVersions": ["0.1", "0.2"] },
+    { "path": "../queryn-docs/docs/product/queryn.md", "requiredVersions": ["0.1", "0.2"] },
+    { "path": "../queryn-docs/docs/product/roadmap.md", "requiredVersions": ["0.1", "0.2"] },
+    { "path": "../queryn-docs/docs/product/jobs-and-non-goals.md", "requiredVersions": ["0.2"] },
+    { "path": "../queryn-docs/docs/specification/index.md", "requiredVersions": ["0.1", "0.2"] }
   ],
   "mermaid": {
     "command": "node",
@@ -26,12 +26,12 @@
     "timeoutMs": 120000
   },
   "readmes": [
-    "../osnova-core/README.md",
-    "../osnova-desktop/README.md",
-    "../osnova-docs/README.md",
-    "../osnova-plugin-sdk/README.md",
-    "../osnova-plugins/README.md",
-    "../osnova-runtime/README.md",
+    "../queryn-core/README.md",
+    "../queryn-desktop/README.md",
+    "../queryn-docs/README.md",
+    "../queryn-sdk/README.md",
+    "../queryn-extensions/README.md",
+    "../queryn-runtime/README.md",
     "README.md"
   ],
   "requiredReadmeSections": [
@@ -44,18 +44,18 @@
   ],
   "docsBuild": {
     "enabled": true,
-    "cwd": "../osnova-docs",
-    "config": "../osnova-docs/docs/.vitepress/config.ts",
+    "cwd": "../queryn-docs",
+    "config": "../queryn-docs/docs/.vitepress/config.ts",
     "command": "pnpm",
     "args": ["build"],
     "timeoutMs": 180000
   },
   "docMap": [
-    { "module": "../osnova-core/packages/project/src/migration.ts", "page": "architecture/versioning-and-migrations.md" },
-    { "module": "../osnova-runtime/src/agent-kernel.ts", "page": "architecture/ai-runtime.md" },
-    { "module": "../osnova-runtime/src/rpc-server.ts", "page": "architecture/runtime-and-security.md" },
-    { "module": "../osnova-desktop/src/preload/index.ts", "page": "architecture/desktop.md" },
-    { "module": "../osnova-plugin-sdk/src/index.ts", "page": "contributing/extensions.md" },
-    { "module": "../osnova-spec/schemas/osnova.schema.json", "page": "specification/index.md" }
+    { "module": "../queryn-core/packages/project/src/migration.ts", "page": "architecture/versioning-and-migrations.md" },
+    { "module": "../queryn-runtime/src/agent-kernel.ts", "page": "architecture/ai-runtime.md" },
+    { "module": "../queryn-runtime/src/rpc-server.ts", "page": "architecture/runtime-and-security.md" },
+    { "module": "../queryn-desktop/src/preload/index.ts", "page": "architecture/desktop.md" },
+    { "module": "../queryn-sdk/src/index.ts", "page": "contributing/extensions.md" },
+    { "module": "../queryn-spec/schemas/queryn.schema.json", "page": "specification/index.md" }
   ]
 }

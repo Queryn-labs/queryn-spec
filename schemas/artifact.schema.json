@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/artifact.schema.json",
-  "title": "Osnova Artifact Descriptor",
+  "$id": "https://spec.queryn.local/schemas/artifact.schema.json",
+  "title": "Queryn Artifact Descriptor",
   "type": "object",
   "required": ["schemaVersion", "id", "type", "createdAt", "payloads", "provenance"],
   "additionalProperties": false,

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/artifact-relation.schema.json",
-  "title": "Osnova Artifact Relation",
+  "$id": "https://spec.queryn.local/schemas/artifact-relation.schema.json",
+  "title": "Queryn Artifact Relation",
   "type": "object",
   "required": ["schemaVersion", "id", "from", "to", "type"],
   "additionalProperties": false,

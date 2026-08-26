@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/session.schema.json",
-  "title": "Osnova Session",
+  "$id": "https://spec.queryn.local/schemas/session.schema.json",
+  "title": "Queryn Session",
   "type": "object",
   "required": ["schemaVersion", "id", "title", "status", "createdAt"],
   "additionalProperties": false,

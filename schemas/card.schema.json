@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/card.schema.json",
-  "title": "Osnova Card Draft",
+  "$id": "https://spec.queryn.local/schemas/card.schema.json",
+  "title": "Queryn Card Draft",
   "type": "object",
   "required": ["id", "type", "front", "back"],
   "additionalProperties": false,
