@@ -1,0 +1,33 @@
+{
+  "osnova-core": {
+    "paths": [
+      "../osnova-core/packages/types/src",
+      "../osnova-core/packages/manifest/src",
+      "../osnova-core/packages/validation/src",
+      "../osnova-core/packages/project/src"
+    ],
+    "issueTodo": true
+  },
+  "osnova-plugin-sdk": {
+    "paths": [
+      "../osnova-plugin-sdk/src",
+      "../osnova-plugin-sdk/templates/**/src"
+    ],
+    "issueTodo": true
+  },
+  "osnova-runtime": {
+    "paths": ["../osnova-runtime/src"],
+    "issueTodo": true
+  },
+  "osnova-desktop": {
+    "paths": ["../osnova-desktop/src"],
+    "issueTodo": false
+  },
+  "osnova-plugins": {
+    "paths": [
+      "../osnova-plugins/examples",
+      "../osnova-plugins/scripts"
+    ],
+    "issueTodo": false
+  }
+}

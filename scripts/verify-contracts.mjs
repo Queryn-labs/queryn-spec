@@ -3,9 +3,9 @@ import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
 
-// Контрактные типы генерируются из схем (scripts/generate-contracts.mjs),
-// поэтому сверка schema <-> interface здесь больше не нужна.
-// Остаются две проверки: локальность $ref и валидность golden-примеров.
+// Contract types are generated from schemas (scripts/generate-contracts.mjs),
+// so schema-to-interface comparison is no longer needed here.
+// The remaining checks cover local $ref targets and valid golden examples.
 
 const schemaFiles = (await readdir(path.join(root, "schemas"))).filter((fileName) => fileName.endsWith(".schema.json"));
 for (const fileName of schemaFiles) {

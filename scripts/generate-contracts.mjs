@@ -8,14 +8,13 @@ const sdkRoot = path.resolve(option("--sdk") ?? path.join(root, "..", "osnova-pl
 const checkOnly = process.argv.includes("--check");
 
 const BANNER = [
-  "/* eslint-disable */",
   "/**",
-  " * Сгенерировано из контрактных схем osnova-spec (scripts/generate-contracts.mjs).",
-  " * Не редактировать вручную: изменения вносятся в схемы и перегенерируются.",
+  " * Generated from the osnova-spec contract schemas (scripts/generate-contracts.mjs).",
+  " * Do not edit by hand: change the schema and regenerate.",
   " */"
 ].join("\n");
 
-// Контрактные типы ядра: схема -> имя интерфейса.
+// Core contract types: schema to interface name.
 const coreContracts = [
   ["osnova", "OsnovaManifest"],
   ["artifact", "ArtifactDescriptor"],
@@ -27,7 +26,7 @@ const coreContracts = [
   ["job", "JobDescriptor"]
 ];
 
-// Контрактные типы SDK.
+// SDK contract types.
 const sdkContracts = [
   ["extension-manifest", "ExtensionManifest"]
 ];

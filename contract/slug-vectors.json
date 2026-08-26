@@ -1,0 +1,20 @@
+{
+  "slugify": [
+    { "input": "Hello, Osnova!", "output": "hello-osnova" },
+    { "input": "  Notes / Ideas  ", "output": "notes-ideas" },
+    { "input": "Архитектура трансформера", "output": "архитектура-трансформера" },
+    { "input": "MiXeD CaSe", "output": "mixed-case" },
+    { "input": "/// leading and trailing ///", "output": "leading-and-trailing" },
+    { "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "output": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+    { "input": "Crème brûlée", "output": "crème-brûlée" }
+  ],
+  "slugifyIdentifier": [
+    { "input": "Hello, Osnova!", "output": "hello-osnova" },
+    { "input": "  Notes / Ideas  ", "output": "notes-ideas" },
+    { "input": "Архитектура трансформера", "output": "" },
+    { "input": "MiXeD CaSe", "output": "mixed-case" },
+    { "input": "/// leading and trailing ///", "output": "leading-and-trailing" },
+    { "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "output": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" },
+    { "input": "Crème brûlée", "output": "creme-brulee" }
+  ]
+}
