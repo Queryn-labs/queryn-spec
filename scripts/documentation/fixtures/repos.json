@@ -1,0 +1,6 @@
+{
+  "fixture": {
+    "paths": ["scripts/documentation/fixtures/source"],
+    "issueTodo": true
+  }
+}

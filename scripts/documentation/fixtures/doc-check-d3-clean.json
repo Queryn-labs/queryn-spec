@@ -1,0 +1,9 @@
+{
+  "pathBase": "spec",
+  "projectFormatSchema": "scripts/documentation/fixtures/project-schema.json",
+  "projectFormatSources": ["scripts/documentation/fixtures/project-migration-supported.ts"],
+  "hostVersionSources": ["scripts/documentation/fixtures/host-version.ts"],
+  "versionSensitivePages": [
+    { "path": "scripts/documentation/fixtures/version-page-supported.md", "requiredVersions": ["0.2"] }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "pathBase": "spec",
+  "docsRoot": "../osnova-docs/docs",
+  "archiveRoots": ["../osnova-docs/docs/archive"],
+  "commentHygieneConfig": "scripts/comment-hygiene/repos.json",
+  "codeArrowRepositories": [
+    "osnova-core",
+    "osnova-plugin-sdk",
+    "osnova-runtime",
+    "osnova-desktop",
+    "osnova-plugins"
+  ],
+  "projectFormatSchema": "schemas/osnova.schema.json",
+  "projectFormatSources": ["../osnova-core/packages/project/src/migration.ts"],
+  "hostVersionSources": ["../osnova-runtime/src/extension-manager.ts"],
+  "versionSensitivePages": [
+    { "path": "../osnova-docs/docs/architecture/versioning-and-migrations.md", "requiredVersions": ["0.1", "0.2"] },
+    { "path": "../osnova-docs/docs/product/osnova-reborn.md", "requiredVersions": ["0.1", "0.2"] },
+    { "path": "../osnova-docs/docs/product/roadmap.md", "requiredVersions": ["0.1", "0.2"] },
+    { "path": "../osnova-docs/docs/product/jobs-and-non-goals.md", "requiredVersions": ["0.2"] },
+    { "path": "../osnova-docs/docs/specification/index.md", "requiredVersions": ["0.1", "0.2"] }
+  ],
+  "mermaid": {
+    "command": "node",
+    "args": ["node_modules/@mermaid-js/mermaid-cli/src/cli.js"],
+    "timeoutMs": 120000
+  },
+  "readmes": [
+    "../osnova-core/README.md",
+    "../osnova-desktop/README.md",
+    "../osnova-docs/README.md",
+    "../osnova-plugin-sdk/README.md",
+    "../osnova-plugins/README.md",
+    "../osnova-runtime/README.md",
+    "README.md"
+  ],
+  "requiredReadmeSections": [
+    "Статус",
+    "Stack",
+    "Команды",
+    "Границы",
+    "Связанные репозитории",
+    "Лицензия"
+  ],
+  "docsBuild": {
+    "enabled": true,
+    "cwd": "../osnova-docs",
+    "config": "../osnova-docs/docs/.vitepress/config.ts",
+    "command": "pnpm",
+    "args": ["build"],
+    "timeoutMs": 180000
+  },
+  "docMap": [
+    { "module": "../osnova-core/packages/project/src/migration.ts", "page": "architecture/versioning-and-migrations.md" },
+    { "module": "../osnova-runtime/src/agent-kernel.ts", "page": "architecture/ai-runtime.md" },
+    { "module": "../osnova-runtime/src/rpc-server.ts", "page": "architecture/runtime-and-security.md" },
+    { "module": "../osnova-desktop/src/preload/index.ts", "page": "architecture/desktop.md" },
+    { "module": "../osnova-plugin-sdk/src/index.ts", "page": "contributing/extensions.md" },
+    { "module": "../osnova-spec/schemas/osnova.schema.json", "page": "specification/index.md" }
+  ]
+}

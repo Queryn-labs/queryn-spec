@@ -1,0 +1,5 @@
+{
+  "pathBase": "spec",
+  "docsRoot": "scripts/documentation/fixtures/docs-clean",
+  "archiveRoots": ["scripts/documentation/fixtures/docs-clean/archive"]
+}

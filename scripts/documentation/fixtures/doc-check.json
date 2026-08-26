@@ -1,0 +1,21 @@
+{
+  "pathBase": "spec",
+  "docsRoot": "scripts/documentation/fixtures/docs",
+  "archiveRoots": ["scripts/documentation/fixtures/docs/archive"],
+  "commentHygieneConfig": "scripts/documentation/fixtures/repos.json",
+  "codeArrowRepositories": ["fixture"],
+  "projectFormatSchema": "scripts/documentation/fixtures/project-schema.json",
+  "projectFormatSources": ["scripts/documentation/fixtures/project-migration.ts"],
+  "hostVersionSources": ["scripts/documentation/fixtures/host-version.ts"],
+  "versionSensitivePages": [
+    { "path": "scripts/documentation/fixtures/docs/version-page.md", "requiredVersions": ["0.2"] }
+  ],
+  "mermaid": {
+    "command": "node",
+    "args": ["node_modules/@mermaid-js/mermaid-cli/src/cli.js"],
+    "timeoutMs": 120000
+  },
+  "readmes": ["scripts/documentation/fixtures/readmes/invalid/README.md"],
+  "docsBuild": { "enabled": false },
+  "docMap": []
+}

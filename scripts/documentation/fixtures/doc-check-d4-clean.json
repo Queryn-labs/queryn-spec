@@ -1,0 +1,9 @@
+{
+  "pathBase": "spec",
+  "docsRoot": "scripts/documentation/fixtures/docs-clean",
+  "mermaid": {
+    "command": "node",
+    "args": ["node_modules/@mermaid-js/mermaid-cli/src/cli.js"],
+    "timeoutMs": 120000
+  }
+}

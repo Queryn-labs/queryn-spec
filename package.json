@@ -7,10 +7,16 @@
   "scripts": {
     "test": "node --test scripts/*.test.mjs",
     "verify": "node scripts/verify-contracts.mjs",
-    "generate": "node scripts/generate-contracts.mjs"
+    "generate": "node scripts/generate-contracts.mjs",
+    "docs:check": "node scripts/check-documentation.mjs",
+    "diagram:check": "node scripts/check-documentation.mjs --only D4",
+    "docs:map": "node scripts/check-documentation.mjs --only D7"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.16.0",
     "json-schema-to-typescript": "^15.0.4",
+    "js-yaml": "^4.3.1",
+    "puppeteer": "^25.9.0",
     "typescript": "^5.7.3"
   }
 }

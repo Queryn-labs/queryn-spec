@@ -1,0 +1,9 @@
+{
+  "$defs": {
+    "formatVersion": {
+      "title": "ProjectFormatVersion",
+      "type": "string",
+      "enum": ["0.1", "0.2"]
+    }
+  }
+}

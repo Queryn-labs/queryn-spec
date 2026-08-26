@@ -1,0 +1,7 @@
+{
+  "pathBase": "spec",
+  "docsRoot": "scripts/documentation/fixtures/docs-clean",
+  "docMap": [
+    { "module": "scripts/documentation/fixtures/source/missing.ts", "page": "missing-page.md" }
+  ]
+}
