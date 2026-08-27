@@ -3,20 +3,20 @@ import path from "node:path";
 import { compile } from "json-schema-to-typescript";
 
 const root = path.resolve(import.meta.dirname, "..");
-const coreRoot = path.resolve(option("--core") ?? path.join(root, "..", "osnova-core"));
-const sdkRoot = path.resolve(option("--sdk") ?? path.join(root, "..", "osnova-plugin-sdk"));
+const coreRoot = path.resolve(option("--core") ?? path.join(root, "..", "queryn-core"));
+const sdkRoot = path.resolve(option("--sdk") ?? path.join(root, "..", "queryn-sdk"));
 const checkOnly = process.argv.includes("--check");
 
 const BANNER = [
   "/**",
-  " * Generated from the osnova-spec contract schemas (scripts/generate-contracts.mjs).",
+  " * Generated from the queryn-spec contract schemas (scripts/generate-contracts.mjs).",
   " * Do not edit by hand: change the schema and regenerate.",
   " */"
 ].join("\n");
 
 // Core contract types: schema to interface name.
 const coreContracts = [
-  ["osnova", "OsnovaManifest"],
+  ["queryn", "QuerynManifest"],
   ["artifact", "ArtifactDescriptor"],
   ["artifact-relation", "ArtifactRelation"],
   ["session", "SessionDescriptor"],
@@ -58,7 +58,7 @@ if (checkOnly) {
     if (current !== content) drifted.push(path.relative(process.cwd(), target));
   }
   if (drifted.length > 0) {
-    process.stderr.write(`Сгенерированные типы устарели, запусти npm run generate в osnova-spec:\n${drifted.map((p) => `  ${p}`).join("\n")}\n`);
+    process.stderr.write(`Сгенерированные типы устарели, запусти npm run generate в queryn-spec:\n${drifted.map((p) => `  ${p}`).join("\n")}\n`);
     process.exit(1);
   }
   process.stdout.write(`Проверено ${generated.length} сгенерированных контрактов: актуальны.\n`);

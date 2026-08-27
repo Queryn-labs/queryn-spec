@@ -1,32 +1,32 @@
 {
-  "osnova-core": {
+  "queryn-core": {
     "paths": [
-      "../osnova-core/packages/types/src",
-      "../osnova-core/packages/manifest/src",
-      "../osnova-core/packages/validation/src",
-      "../osnova-core/packages/project/src"
+      "../queryn-core/packages/types/src",
+      "../queryn-core/packages/manifest/src",
+      "../queryn-core/packages/validation/src",
+      "../queryn-core/packages/project/src"
     ],
     "issueTodo": true
   },
-  "osnova-plugin-sdk": {
+  "queryn-sdk": {
     "paths": [
-      "../osnova-plugin-sdk/src",
-      "../osnova-plugin-sdk/templates/**/src"
+      "../queryn-sdk/src",
+      "../queryn-sdk/templates/**/src"
     ],
     "issueTodo": true
   },
-  "osnova-runtime": {
-    "paths": ["../osnova-runtime/src"],
+  "queryn-runtime": {
+    "paths": ["../queryn-runtime/src"],
     "issueTodo": true
   },
-  "osnova-desktop": {
-    "paths": ["../osnova-desktop/src"],
+  "queryn-desktop": {
+    "paths": ["../queryn-desktop/src"],
     "issueTodo": false
   },
-  "osnova-plugins": {
+  "queryn-extensions": {
     "paths": [
-      "../osnova-plugins/examples",
-      "../osnova-plugins/scripts"
+      "../queryn-extensions/examples",
+      "../queryn-extensions/scripts"
     ],
     "issueTodo": false
   }

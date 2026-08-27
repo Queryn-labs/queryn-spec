@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/relation.schema.json",
-  "title": "Osnova Relation Draft",
+  "$id": "https://spec.queryn.local/schemas/relation.schema.json",
+  "title": "Queryn Relation Draft",
   "type": "object",
   "required": ["id", "from", "to", "type"],
   "additionalProperties": false,

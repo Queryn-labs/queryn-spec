@@ -1,9 +1,9 @@
 {
-  "name": "osnova-spec",
+  "name": "queryn-spec",
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Спецификация формата проекта Osnova и контрактные схемы",
+  "description": "Спецификация формата проекта Queryn и контрактные схемы",
   "scripts": {
     "test": "node --test scripts/*.test.mjs",
     "verify": "node scripts/verify-contracts.mjs",

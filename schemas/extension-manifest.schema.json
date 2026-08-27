@@ -1,14 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/extension-manifest.schema.json",
-  "title": "Osnova Extension Manifest v1",
+  "$id": "https://spec.queryn.local/schemas/extension-manifest.schema.json",
+  "title": "Queryn Extension Manifest v1",
   "type": "object",
   "required": [
     "manifestVersion",
     "id",
     "name",
     "version",
-    "osnova",
+    "queryn",
     "permissions",
     "contributes"
   ],
@@ -40,7 +40,7 @@
       "type": "string",
       "minLength": 1
     },
-    "osnova": {
+    "queryn": {
       "type": "object",
       "required": [
         "minVersion"
@@ -123,7 +123,7 @@
         "protocol": {
           "type": "string",
           "enum": [
-            "osnova-tool-v1",
+            "queryn-tool-v1",
             "mcp"
           ]
         },

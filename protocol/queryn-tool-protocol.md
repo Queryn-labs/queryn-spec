@@ -1,4 +1,4 @@
-# Osnova Tool Protocol v1
+# Queryn Tool Protocol v1
 
 Advanced Tool использует JSON-RPC 2.0 через stdio или локальный HTTP.
 
@@ -28,7 +28,7 @@ operations и capabilities. Несовместимая версия заверш
 ## Job result
 
 Результат содержит structured output и список candidate payloads относительно
-`/osnova/outbox`. Absolute paths и `..` запрещены. Host не доверяет объявленным
+`/queryn/outbox`. Absolute paths и `..` запрещены. Host не доверяет объявленным
 MIME, size или hash и вычисляет их заново.
 
 Remote/MCP runtime, у которого нет локального outbox mount, может добавить к
@@ -61,7 +61,7 @@ Resources - в context providers: contribution задаёт `resourceUriTemplate
 
 Если `tools/call` возвращает экспериментальный MCP task, adapter опрашивает
 `tasks/get`, передаёт отмену в `tasks/cancel` и завершает внешний task внутри
-таймаута текущего Osnova Job. Внутренний Osnova Job остаётся источником истины
+таймаута текущего Queryn Job. Внутренний Queryn Job остаётся источником истины
 для approvals, retention, provenance и публикации артефактов. Ответы stdio/HTTP
 имеют host-enforced предел размера; MCP server не может вернуть payload в
 неограниченной JSON-строке.

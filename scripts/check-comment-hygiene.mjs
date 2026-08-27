@@ -8,13 +8,13 @@ const configPath = path.join(import.meta.dirname, "comment-hygiene", "repos.json
 const sourceExtensions = new Set([".cjs", ".cts", ".js", ".jsx", ".mjs", ".mts", ".ts", ".tsx"]);
 const excludedDirectoryNames = new Set(["dist", "dist-test", "node_modules", "out"]);
 const issueRepositories = new Set([
-  "osnova-core",
-  "osnova-desktop",
-  "osnova-docs",
-  "osnova-plugin-sdk",
-  "osnova-plugins",
-  "osnova-runtime",
-  "osnova-spec"
+  "queryn-core",
+  "queryn-desktop",
+  "queryn-docs",
+  "queryn-sdk",
+  "queryn-extensions",
+  "queryn-runtime",
+  "queryn-spec"
 ]);
 const todoPattern = /^TODO\(([a-z][a-z0-9-]{1,30})#(\d{1,7})\):\s+\S/;
 const bannedMarkerPattern = /\b(FIXME|HACK|XXX)\b/g;
@@ -195,7 +195,7 @@ function inspectComment(commentText, commentOffset, sourceText, filePath, issueT
         commentOffset + bodyOffset + todoOffset,
         "todo",
         issueTodo
-          ? "TODO must use TODO(osnova-repo#123): reason syntax with a known repository."
+          ? "TODO must use TODO(queryn-repo#123): reason syntax with a known repository."
           : "TODO comments are forbidden in this repository."
       );
     }

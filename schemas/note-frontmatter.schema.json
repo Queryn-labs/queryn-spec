@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/note-frontmatter.schema.json",
-  "title": "Osnova Note Frontmatter Draft",
+  "$id": "https://spec.queryn.local/schemas/note-frontmatter.schema.json",
+  "title": "Queryn Note Frontmatter Draft",
   "type": "object",
   "additionalProperties": true,
   "properties": {

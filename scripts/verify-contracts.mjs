@@ -13,13 +13,13 @@ for (const fileName of schemaFiles) {
   verifyLocalRefs(schema, schema, fileName);
 }
 
-await validateExample("examples/reborn/osnova.json", "schemas/osnova.schema.json");
+await validateExample("examples/reborn/queryn.json", "schemas/queryn.schema.json");
 await validateExample("examples/reborn/sessions/first-session/session.json", "schemas/session.schema.json");
 const eventSchema = JSON.parse(await readFile(path.join(root, "schemas", "session-event.schema.json"), "utf8"));
 const eventLines = (await readFile(path.join(root, "examples", "reborn", "sessions", "first-session", "events.jsonl"), "utf8")).split(/\r?\n/).filter(Boolean);
 for (const [index, line] of eventLines.entries()) validate(eventSchema, JSON.parse(line), eventSchema, `events.jsonl:${index + 1}`);
 
-process.stdout.write(`Verified ${schemaFiles.length} contract schemas and the Reborn golden project.\n`);
+process.stdout.write(`Verified ${schemaFiles.length} contract schemas and the Queryn golden project.\n`);
 
 async function validateExample(examplePath, schemaPath) {
   const [value, schema] = await Promise.all([

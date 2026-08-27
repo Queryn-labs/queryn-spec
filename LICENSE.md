@@ -14,7 +14,7 @@ JSON Schema, файлы примеров и другие машинно-чита
 
 MIT License
 
-Copyright (c) 2026 Osnova Labs
+Copyright (c) 2026 Queryn Labs
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of the schema and example files in this repository to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of those files, subject to inclusion of this copyright notice and permission notice.
 

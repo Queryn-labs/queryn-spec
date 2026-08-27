@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/agent-plan.schema.json",
-  "title": "Osnova Agent Plan",
+  "$id": "https://spec.queryn.local/schemas/agent-plan.schema.json",
+  "title": "Queryn Agent Plan",
   "type": "object",
   "required": ["schemaVersion", "id", "goal", "steps", "createdAt", "maxSteps"],
   "additionalProperties": false,

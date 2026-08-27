@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://spec.osnova.local/schemas/osnova.schema.json",
-  "title": "Osnova Project Manifest",
+  "$id": "https://spec.queryn.local/schemas/queryn.schema.json",
+  "title": "Queryn Project Manifest",
   "type": "object",
   "required": ["formatVersion", "id", "name", "createdAt"],
   "additionalProperties": false,
