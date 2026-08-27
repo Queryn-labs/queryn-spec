@@ -14,7 +14,7 @@ Method groups:
 - `job.get|list|cancel|subscribe`;
 - `runtime.status|start|stop`;
 - `connector.list|sync`;
-- `model.install|list|remove`, `model.provider.configure|config-list|list|models-list`;
+- `model.install|list|remove`, `model.provider.template-list|configure|config-list|list|models-list|remove`;
 - `credential.remove`;
 - `diagnostics.doctor|export`.
 
@@ -53,6 +53,29 @@ operations проходят обычную проверку доступност
 `context.resolve` принимает risk `approval` для network/native custom provider.
 Сам файл проекта не может выдать это разрешение: grants и сохранённые правила
 живут в локальном runtime state.
+
+## Поставщики моделей
+
+`model.provider.template-list` возвращает встроенный каталог без секретов. Каждый
+элемент содержит `id`, `group`, `displayName`, `description`, `transport`, `auth`,
+`defaultProviderId` и необязательный `defaultEndpoint`. Поле `group` определяет
+получателя `local | cloud`, а `auth` принимает `none | api-key | cli-session`.
+Наличие режима авторизации в типе не означает наличие рабочего транспорта.
+Текущий каталог публикует только шаблоны с транспортом `openai-compatible`.
+
+`model.provider.configure` принимает `config` и необязательный `secret`. Новая
+конфигурация содержит `id`, `templateId`, `type`, `endpoint`, `recipient` и
+необязательный `credentialAccount`. `recipient` является явным решением клиента.
+Runtime проверяет, что локальный получатель использует адрес обратной петли по
+HTTP или HTTPS, облачный получатель использует внешний HTTPS-адрес, а шаблон
+соответствует транспорту и получателю. Старые записи без `templateId` и
+`recipient` нормализуются при чтении по известному адресу или попадают в общий
+локальный либо облачный шаблон.
+
+`model.provider.remove` принимает `providerId`, удаляет конфигурацию и сразу
+снимает регистрацию провайдера. Связанный секрет удаляется только тогда, когда
+его `credentialAccount` больше не используется другой конфигурацией. Секреты не
+возвращаются методами каталога и конфигураций.
 
 `mcp.server.register`, `mcp.server.list` и `mcp.server.unregister` пока не входят
 в dispatch этого RPC. Они доступны через прямой API `QuerynRuntime` и тестовые
